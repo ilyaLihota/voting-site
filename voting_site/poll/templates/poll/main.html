@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"/>
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Montserrat:400,700&display=swap" rel="stylesheet">
+    <title>
+      {% block title %}
+        Voting site
+      {% endblock %}
+    </title>
+  </head>
+  <body>
+
+    <header class="header">
+      <div class="container">
+        <div class="header__inner">
+          <div class="header__logo">Voting site</div>
+
+          <nav class="nav">
+            <a class="nav__link" href="#">About</a>
+            <a class="nav__link" href="#">Service</a>
+            <a class="nav__link" href="#">Contact</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <div class="intro">
+      <div class="container">
+      </div>
+    </div>
+
+  </body>
+</html>

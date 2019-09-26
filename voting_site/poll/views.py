@@ -1,7 +1,8 @@
 from django.shortcuts import render
 
+from .models import Poll
 
 # Create your views here.
-def posts_list(request):
-    n = ['Ilya', 'OLeg', 'Petya']
-    return render(request, 'poll/index.html', context={'names': n})
+def polls_list(request):
+    polls = Poll.objects.all()
+    return render(request, 'poll/index.html', context={'polls': polls})

@@ -1,7 +1,12 @@
-{% extends 'poll/base.html' %}
-
-{% for name in names %}
-  <p>
-    {{ name }}
-  </p>
-{% endfor %}
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"/>
+    <title>Poll</title>
+  </head>
+  <body>
+    <h1>Poll page</h1>
+  </body>
+</html>
