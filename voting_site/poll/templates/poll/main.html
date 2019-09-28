@@ -1,121 +1,40 @@
-<!DOCTYPE html>
-{% load staticfiles %}
-<html lang="en" dir="ltr">
-  <head>
-    <script src="https://kit.fontawesome.com/7c55f0a28f.js" crossorigin="anonymous"></script>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="{% static 'css/main_styles.css' %}"/>
-    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Montserrat:400,700&display=swap" rel="stylesheet">
-    <title>
-      {% block title %}
-        Voting site
-      {% endblock %}
-    </title>
-  </head>
-  <body>
+{% extends "poll/base.html" %}
 
-    <header class="header">
-      <div class="container">
-        <div class="header__inner">
-          <a href="/" class="header__logo">ONLINE VOTING</a>
-          <nav class="nav">
-            <a class="nav__link" href="/poll">Log in</a>
-            <a class="nav__link" href="/poll">Sign in</a>
-          </nav>
+{% block title %}Online woting{% endblock %}
+
+{% block content %}
+  <section class="section">
+    <div class="container">
+      <div class="section__header">
+        <h3 class="section__suptitle">Your vote counts!</h3>
+        <h2 class="section__title">Our polls</h2>
+        <div class="section__text">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna
+            aliqua.</p>
         </div>
       </div>
-    </header>
 
-    <div class="intro">
-      <div class="container">
-        <div class="intro__inner">
-          <h2 class="intro__suptitle">Welcome to online voting</h2>
-          <h1 class="intro__title">Creative template</h1>
+      <div class="carts">
+        <div class="cart__item">
+          <div class="cart__img">
+            <img src="static/images/carts/1.jpg" alt="">
+          </div>
+          <div class="cart__description">Description</div>
+        </div>
+        <div class="cart__item">
+          <div class="cart__img">
+            <img src="static/images/carts/2.jpg" alt="">
+          </div>
+          <div class="cart__description">Description</div>
+        </div>
+        <div class="cart__item">
+          <div class="cart__img">
+            <img src="static/images/carts/3.jpg" alt="">
+          </div>
+          <div class="cart__description">Description</div>
         </div>
       </div>
     </div>
-
-    <section class="section">
-      <div class="container">
-
-        <div class="section__header">
-          <h3 class="section__suptitle">Your vote counts!</h3>
-          <h2 class="section__title">Our polls</h2>
-          <div class="section__text">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore magna
-              aliqua.</p>
-          </div>
-        </div>
-
-        <div class="carts">
-          <div class="cart__item">
-            <div class="cart__img">
-              <img src="static/images/carts/1.jpg" alt="">
-            </div>
-            <div class="cart__description">Description</div>
-          </div>
-          <div class="cart__item">
-            <div class="cart__img">
-              <img src="static/images/carts/2.jpg" alt="">
-            </div>
-            <div class="cart__description">Description</div>
-          </div>
-          <div class="cart__item">
-            <div class="cart__img">
-              <img src="static/images/carts/3.jpg" alt="">
-            </div>
-            <div class="cart__description">Description</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-<footer class="footer">
-  <div class="container">
-    <div class="footer__inner">
-      <div class="footer__col">
-        <div class="footer_logo">Online voting</div>
-        <div class="footer__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-          nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-          in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur.</div>
-
-        <div class="footer__social">
-          <div class="footer__social-header">
-            <b>15k</b> followers
-          </div>
-          <div class="footer__social-content">
-            Follow us:
-            <a href="https://www.facebook.com/" target="_blank">
-              <i class="fab fa-facebook"></i>
-            </a>
-            <a href="https://twitter.com/?lang=ru" target="_blank">
-              <i class="fab fa-twitter"></i>
-            </a>
-            <a href="https://www.instagram.com/?hl=ru" target="_blank">
-              <i class="fab fa-instagram"></i>
-            </a>
-          </div>
-        </div>
-
-        <form class="subscribe" action="/" method="post">
-          <input class="subscribe__input" type="email" name="name" placeholder="Your email">
-          <button class="subscribe_btn" type="submit">Subscribe</botton>
-        </form>
-      </div>
-
-    </div><!-- /.<footer__inner -->
-
-    <div class="copyright">
-      © 2019 Online voting by <span>Ilya Likhota</span>
-    </div>
-
-  </div><!-- /.container -->
-</footer>
-
-
-  </body>
-</html>
+  </section>
+{% endblock %}

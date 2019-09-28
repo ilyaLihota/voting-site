@@ -17,7 +17,6 @@ Including another URLconf
 # from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-
 from voting_site import views
 
 
@@ -25,4 +24,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.main_page),
     path('poll/', include('poll.urls')),
+    path('login/', include('users.urls')),
 ]
