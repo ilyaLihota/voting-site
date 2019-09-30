@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'poll.apps.PollConfig',
-    'users.apps.UserConfig',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
@@ -65,6 +65,7 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.media',
                 'django.contrib.messages.context_processors.messages',
             ],
         },
@@ -81,8 +82,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'voting_db',
-        'USER': 'postgres',
-        'PASSWORD': '1',
+        'USER': 'voting_user',
+        'PASSWORD': 'password',
         'HOST': '127.0.0.1',
         'PORT': 5432,
     }
@@ -91,6 +92,8 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
+
+AUTH_USER_MODEL = 'users.User'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -107,6 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+INCORRECT_ATTEMPTS_LIMIT = 3
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
@@ -130,3 +134,12 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+
+ADMIN_MEDIA_PREFIX = '/static/admin/'
+MEDIA_ROOT = 'uploads/'
+MEDIA_URL = '/uploads/'
+
+EMAIL_HOST = 'smtp.mailgun.org'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'admin@polls.com'

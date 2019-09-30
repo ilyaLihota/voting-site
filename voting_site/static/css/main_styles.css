@@ -140,6 +140,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
+
+
 /* Section */
 .section {
   padding: 60px 0;
@@ -373,4 +375,83 @@ h1, h2, h3, h4, h5, h6 {
 
 .copyright span {
   color: #f54242;
+}
+
+
+
+
+/* Login header */
+.header-login {
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+
+  background-color: #ebebeb;
+}
+
+.header__logo-login {
+  font-size: 25px;
+  font-weight: 700;
+  color: #777;
+
+  text-decoration: none;
+}
+
+.header__logo-login:hover {
+  color: #f54242;
+
+  text-decoration: none;
+}
+
+/* Login nav */
+.nav__link-login {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 10px;
+  position: relative;
+
+  color: #777;
+  text-decoration: none;
+
+  transition: color 0.1s linear;
+}
+
+.nav__link-login::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 3px;
+
+  background-color: #f54242;
+  opacity: 0;
+
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+
+  transition: opacity 0.1s linear;
+}
+
+.nav__link-login:hover {
+  color: #f54242;
+}
+
+.nav__link-login:hover::after {
+  opacity: 1;
+}
+
+
+/* Login__header */
+.login__header {
+  text-align: center;
+  font-size: 35px;
+  padding-top: 100px;
+  padding-bottom: 50px;
 }

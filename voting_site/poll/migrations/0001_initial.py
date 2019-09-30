@@ -15,12 +15,12 @@ class Migration(migrations.Migration):
             name='Poll',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('poll_id', models.PositiveIntegerField()),
-                ('title', models.CharField(max_length=255)),
-                ('start_time', models.DateTimeField(auto_now_add=True)),
+                ('title', models.CharField(max_length=255, unique=True)),
+                ('description', models.TextField(blank=True, db_index=True)),
+                ('date_created', models.DateTimeField(auto_now_add=True)),
+                ('start_time', models.DateTimeField()),
                 ('end_time', models.DateTimeField()),
-                ('status', models.PositiveIntegerField()),
-                ('amount_of_quest', models.PositiveIntegerField()),
+                ('amount_of_questions', models.PositiveIntegerField()),
             ],
         ),
     ]
