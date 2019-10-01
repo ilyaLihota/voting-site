@@ -14,7 +14,7 @@ def logout_view(request):
 
 def login_view(request):
     if request.method == 'GET':
-        return render(request, 'login.html', context={
+        return render(request, 'users/login.html', context={
             'error': False
         })
     elif request.method == 'POST':
@@ -36,7 +36,7 @@ def login_view(request):
                 user.save()
             except User.DoesNotExist:
                 pass
-            return render(request, 'login.html', context={
+            return render(request, 'users/login.html', context={
             'error': True
             })
 
@@ -50,8 +50,8 @@ def register(request):
             return render(request, 'check_email.html')
     else:
         form = RegistrationForm()
-    return render(request, 'users/registration.html', contex={
-        'form': form
+    return render(request, 'users/register.html', context={
+        'form': form,
     })
 
 @require_GET
@@ -62,7 +62,3 @@ def verify_email(request):
         request.user.save()
         return render(request, 'account_activated.html')
     return redirect('/')
-
-#
-# def signin(request):
-#     return render(request, 'users/signin.html')

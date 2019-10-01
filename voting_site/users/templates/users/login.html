@@ -1,16 +1,28 @@
 {% extends "users/base_users.html" %}
+
 {% block title %}Login{% endblock %}
+
+{% block nav %}
+  <nav class="nav">
+    <a class="nav__link-login" href="/users/register/">Register</a>
+  </nav>
+{% endblock %}
+
 {% block content %}
-  {% if form.errors %}
-  <p>Your username and password didn't match. Please try again.</p>
-  {% endif %}
+  <div class="login__form">
+    <h1>Вход</h1>
+    <div class="big-card form">
+      <form method="POST" action="/accounts/login/">
+        {% csrf_token %}
+        {% if error %}
+        <div class="error">Something went wrong</div>
+        {% endif %}
 
-  <form class="" action="{% url 'users:login' %}" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
+        <input placeholder="Username" name="username" type="text" class="text-input">
+        <input placeholder="Password" name="password" type="password" class="text-input">
 
-    <button type="button" name="submit">log in</button>
-    <input type="hidden" name="next" value="{% url 'learning_logs:index' %}"/>
-  </form>
-  
+        <input type="submit" class="submit-btn">
+      </form>
+    </div>
+  </div>  
 {% endblock content %}
