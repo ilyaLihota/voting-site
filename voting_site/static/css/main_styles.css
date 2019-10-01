@@ -144,6 +144,8 @@ h1, h2, h3, h4, h5, h6 {
 /* Section */
 .section {
   padding: 60px 0;
+
+  background-color: #e6e6e6;
 }
 
 .section__header {
@@ -239,6 +241,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
+/* Cards */
+.title-card {
+  font-size: 20px;
+  color: black;
+}
+
 .big-card {
   background: white;
   /* margin: 30px; */
@@ -265,7 +273,7 @@ h1, h2, h3, h4, h5, h6 {
   padding-top: 65px;
   padding-bottom: 10px;
 
-  background-color: #ebebeb;
+  background-color: #ededed;
 }
 
 .footer__inner {

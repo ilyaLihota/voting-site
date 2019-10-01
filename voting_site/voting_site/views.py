@@ -3,4 +3,4 @@ from django.http import HttpResponse
 
 
 def main_page(request):
-    return render(request, 'poll/main.html')
+    return render(request, 'poll/index.html')

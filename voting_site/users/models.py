@@ -25,6 +25,9 @@ class User(AbstractUser):
     incorrect_attempts = models.PositiveSmallIntegerField(default=0)
     initial_secret_key = models.CharField(max_length=256)
 
+    age = models.PositiveSmallIntegerField(default=0)
+    sex = models.CharField(max_length=10)
+
     def generate_key(self):
         key = "".join(
             random.sample(ALPHABET, 256)

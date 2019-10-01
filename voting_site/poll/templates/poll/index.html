@@ -1,20 +1,23 @@
-{% extends "poll/base.html" %}
+{% extends "poll/main.html" %}
 
 {% block title %}
   Polls list
 {% endblock %}
 
-{% block content %}
-  {% for poll in polls %}
-    <div class="card-columns">
+{% block carts %}
+
+  <div class="card-columns">
+
+    {% for poll in polls %}
       <div class="card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
+        <img src="{{ poll.picture.url }}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">{{ poll.title }}</h5>
-          <p class="card-text">{{ poll.description }}</p>
-          <a href="#" class="btn btn-primary">Read</a>
+          <p class="card-text">{{ poll.description | truncatechars:200 }}</p>
+          <a href="#" class="btn btn-primary">Participate</a>
         </div>
       </div>
-    </div>
-  {% endfor %}
+    {% endfor %}
+  </div>
+
 {% endblock %}
