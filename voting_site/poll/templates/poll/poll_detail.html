@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  {% include "./head_html.html" %}
+  <title>{% block title %}Online voting | {{ id }}{% endblock title %}</title>
+</head>
+  <body>
+  
+    <div class="container">
+      <img src="{{ picture.url }}" alt="...">
+      <h1>{{ title }}</h1>
+      <h2>{{ description }}</h2>
+      <h3>date_created: {{ date_created }}</h3>
+      <h3>start_time: {{ start_time }}</h3>
+      <h3>end_time: {{ end_time }}</h3>
+      <h3>status: {{ status }}</h3>
+      <h3>amount_of_questions: {{ amount_of_questions }}</h3>
+      <h3>owner: {{ owner }}</h3>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <!-- {% include "./footer_about.html" %} -->
+        <!-- {% include "./footer_social.html" %} -->
+        <!-- {% include "./footer_subscribe.html" %} -->
+        {% include "./footer_copyright.html" %}
+      </div><!-- /.container -->
+    </footer>
+
+  </body>
+</html>

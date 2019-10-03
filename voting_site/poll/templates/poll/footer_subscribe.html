@@ -1,0 +1,7 @@
+<div class="footer__subsribe">
+  <form class="subscribe" action="/" method="post">
+    {% csrf_token %}
+    <input class="subscribe__input" type="email" name="name" placeholder="Your email">
+    <button class="subscribe_btn" type="submit">Subscribe</button>
+  </form>
+</div>

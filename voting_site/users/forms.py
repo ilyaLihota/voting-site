@@ -12,6 +12,8 @@ class RegistrationForm(forms.ModelForm):
             "password",
             "first_name",
             "last_name",
+            "age",
+            "sex",
         )
         widgets = {"password": forms.PasswordInput}
 

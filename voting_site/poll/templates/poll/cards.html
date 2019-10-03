@@ -1,0 +1,25 @@
+<div class="band">
+  <div class="item-1">
+    <a href="#" class="card">
+      <div class="thumb" style="background-image: url({{ poll.picture.url }});"></div>
+      <article>
+        <h1>{{ poll.title }}</h1>
+        <p>{{ poll.description}}</p>
+        <span>{{ poll.owner }}</span>
+      </article>
+    </a>
+  </div>
+
+  {% for poll in polls %}
+    <div class="item-3">
+      <a href="{% url "detail" id=poll.id %}" class="card">
+        <div class="thumb" style="background-image: url({{ poll.picture.url }});"></div>
+        <article>
+          <h1>{{ poll.title }}</h1>
+          <p>{{ poll.description | truncatechars:200 }}</p>
+          <span>{{ poll.owner }}</span>
+        </article>
+      </a>
+    </div>
+  {% endfor %}
+</div>

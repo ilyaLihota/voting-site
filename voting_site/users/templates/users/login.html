@@ -1,28 +1,45 @@
-{% extends "users/base_users.html" %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    {% include "poll/head_html.html" %}
+    <title>{% block title %}Online voting | Login{% endblock title %}</title>
+  </head>
+  <body>
+    
+    {% include "poll/header_inner.html" %}
 
-{% block title %}Login{% endblock %}
+    <section class="section">
 
-{% block nav %}
-  <nav class="nav">
-    <a class="nav__link-login" href="/users/register/">Register</a>
-  </nav>
-{% endblock %}
+      <div class="login__form">
+        <h1 class="login__title">Вход</h1>
+        <div class="big-card form">
+          <form method="POST" action="{% url "login" %}">
+            {% csrf_token %}
+            {% if error %}
+            <div class="error">Something went wrong</div>
+            {% endif %}
 
-{% block content %}
-  <div class="login__form">
-    <h1>Вход</h1>
-    <div class="big-card form">
-      <form method="POST" action="/accounts/login/">
-        {% csrf_token %}
-        {% if error %}
-        <div class="error">Something went wrong</div>
-        {% endif %}
+            <input placeholder="Username" name="username" type="text" class="text-input">
+            <input placeholder="Password" name="password" type="password" class="text-input">
 
-        <input placeholder="Username" name="username" type="text" class="text-input">
-        <input placeholder="Password" name="password" type="password" class="text-input">
+            <input type="submit" class="submit-btn">
+          </form>
+        </div>
+        <!-- {% block nav %}
+          <nav class="nav">
+            <a class="nav__link-login" href="/users/register/">Register</a>
+          </nav>
+        {% endblock %} -->
+      </div>
 
-        <input type="submit" class="submit-btn">
-      </form>
-    </div>
-  </div>  
-{% endblock content %}
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        {% include "poll/footer_about.html" %}
+        {% include "poll/footer_copyright.html" %}
+      </div><!-- /.container -->
+    </footer>
+
+  </body>
+</html>

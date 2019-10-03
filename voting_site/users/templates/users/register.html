@@ -1,24 +1,42 @@
-{% extends "users/base_users.html" %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    {% include "poll/head_html.html" %}
+    <title>{% block title %}Online voting | Register{% endblock title %}</title>
+  </head>
+  <body>
+    
+    {% include "poll/header_inner.html" %}
 
-{% block title %}Registration{% endblock %}
+    <section class="section">
+      <div class="login__form">
+        <h1>Регистрация1</h1>
+        <div class="big-card form">
+          <form method="POST" action="{% url "register" %}">
+            {% csrf_token %}
 
-{% block nav %}
+            {{ form }}
+
+            <input type="submit" class="submit-btn">
+          </form>
+        </div>
+      </div>
+    </section>
+
+
+    <footer class="footer">
+      <div class="container">
+        {% include "poll/footer_about.html" %}
+        {% include "poll/footer_copyright.html" %}
+      </div><!-- /.container -->
+    </footer>
+
+  </body>
+</html>
+
+
+<!-- {% block nav %}
   <nav class="nav">
     <a class="nav__link-login" href="/users/accounts/login">Log in</a>
   </nav>
-{% endblock %}
-
-{% block content %}
-  <div class="login__form">
-    <h1>Регистрация</h1>
-    <div class="big-card form">
-      <form method="POST" action="/register">
-        {% csrf_token %}
-
-        {{ form }}
-
-        <input type="submit" class="submit-btn">
-      </form>
-    </div>
-  </div>
-{% endblock %}
+{% endblock %} -->
