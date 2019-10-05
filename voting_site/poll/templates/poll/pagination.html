@@ -1,0 +1,27 @@
+<div class="polls__pagination">
+  {% if is_paginated %}
+    <nav aria-label="...">
+      <ul class="pagination">
+
+        <li class="page-item {% if not prev_url %}disabled{% endif %}">
+          <a class="page-link" href="{{ prev_url }}" tabindex="-1" aria-disabled="true">Previous</a>
+        </li>
+
+        {% for number in page_object.paginator.page_range %}
+          {% if page_object.number == number %}
+            <li class="page-item active" aria-current="page">
+              <a class="page-link" href="?page={{ number }}">{{ number }}<span class="sr-only">(current)</span></a>
+            </li>
+          {% elif number > page_object.number|add:-3 and number < page_object.number|add:3 %}
+            <li class="page-item"><a class="page-link" href="?page={{ number }}">{{ number }}</a></li>
+          {% endif %}
+        {% endfor %}
+
+        <li class="page-item">
+          <a class="page-link" href="{{ next_url }}">Next</a>
+        </li>
+
+      </ul>
+    </nav>
+  {% endif %}
+</div>

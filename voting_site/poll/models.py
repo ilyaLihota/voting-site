@@ -12,6 +12,7 @@ class Poll(models.Model):
     status = models.CharField(max_length=255, default='inactive')
     amount_of_questions = models.PositiveIntegerField(blank=True)
     picture = models.ImageField(null=True, upload_to='images/polls/')
+    is_big_card = models.BooleanField(default=False)
     owner = models.ForeignKey(
         User,
         null=True,
@@ -19,11 +20,11 @@ class Poll(models.Model):
         on_delete=models.CASCADE
     )
 
-    class Meta:
-        pass
-
     def __str__(self):
         return self.title
+
+        class Meta:
+            ordering = ['-date_created']
 
 
 class Question(models.Model):
