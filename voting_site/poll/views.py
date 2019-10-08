@@ -1,26 +1,17 @@
-from django.shortcuts import render, get_object_or_404
-
-from .models import Poll
+from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
+from django.db.models import Q
+from django.views.generic import View
+
+from .models import *
+from .forms import PollForm
+from .utils import ObjectDetailMixin
 
 
-# Create your views here.
-# def search(request):
-#     q = request.GET.get('q')
-#     page_num =
-#
-#     return render(request, 'poll/search.html', context={
-#         pass
-#     })
-
-
-def polls_list(request):
-    amount_of_polls_on_page = 4
-    polls = Poll.objects.all()
-    paginator = Paginator(polls, amount_of_polls_on_page, orphans=4)
-    page_number = request.GET.get('page', 1)
+def pagination(polls, page_number):
+    amount_of_polls_on_page = 6
+    paginator = Paginator(polls, amount_of_polls_on_page, orphans=amount_of_polls_on_page)
     page = paginator.get_page(page_number)
-
     is_paginated = page.has_other_pages()
 
     if page.has_previous():
@@ -40,21 +31,65 @@ def polls_list(request):
         'next_url': next_url,
     }
 
-    return render(request, 'poll/main.html', context=context)
+    return context
 
 
-def poll_detail(request, id=None):
-    poll = get_object_or_404(Poll, id=id)
-    context = {
-        'id': poll.id,
-        'title': poll.title,
-        'description': poll.description,
-        'date_created': poll.date_created,
-        'start_time': poll.start_time,
-        'end_time': poll.end_time,
-        'status': poll.status,
-        'amount_of_questions': poll.amount_of_questions,
-        'picture': poll.picture,
-        'owner': poll.owner,
-    }
-    return render(request, 'poll/poll_detail.html', context)
+def search(request):
+    query = request.GET.get('search', '')
+    page_number = request.GET.get('page', 1)
+    polls = Poll.objects.filter(
+        Q(title__icontains=query) |
+        Q(description__icontains=query)
+    )
+    return render(request, 'poll/main.html', context=pagination(polls, page_number))
+
+
+def polls_list(request):
+    page_number = request.GET.get('page', 1)
+    polls = Poll.objects.all()
+
+    return render(request, 'poll/main.html', context=pagination(polls, page_number))
+
+
+def poll_create(request):
+    if request.method == 'GET':
+        form = PollForm()
+        return render(request, 'poll/poll_create_form.html', context={
+            'form': form,
+        })
+    elif request.method == 'POST':
+        bound_form = PollForm(request.POST)
+        if bound_form.is_valid():
+            new_poll = bound_form.save()
+            return redirect(new_poll)
+        return render(request, 'poll/poll_create_form.html', context={
+            'form': bound_form,
+        })
+
+
+class PollDetail(ObjectDetailMixin, View):
+    model = Poll
+    template = 'poll/poll_detail.html'
+
+
+def questions_create(request):
+    if request.method == 'GET':
+        form = QuestionForm()
+        return render(
+            request,
+            'poll/question_create_form.html',
+            context={'form': form}
+        )
+    elif request.method == 'POST':
+        bound_form = QuestionForm(request.POST)
+        if bound_form.is_valid():
+            new_question = bound_form.save()
+            return redirect(new_question)
+        return render(request, 'poll/question_create_form.html', context={
+            'form': bound_form,
+        })
+
+
+def account(request):
+    user_polls = Poll.objects.all()
+    return render(request, 'poll/account.html', context={'user_polls': user_polls})

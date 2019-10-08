@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    {% include "./head_html.html" %}
+    <title>{% block title %}Online voting | Home{% endblock title %}</title>
+  </head>
+  <body>
+    <header class="account__header">
+      <div class="container">
+        <div class="account__header__inner">
+          <a href="/" class="account__header__logo">ONLINE VOTING</a>
+          <nav class="nav">
+              <a class="account__nav__link" href="/">Log out</a>
+              <a class="account__nav__link" href="/">Log out</a>
+              <a class="account__nav__link" href="{% url "poll_create_url" %}">
+                <i class="fas fa-plus-circle fa-2x"></i>
+              </a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+      {% include "./user_polls.html" %}
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <!-- {% include "./footer_about.html" %} -->
+        {% include "./footer_social.html" %}
+        <!-- {% include "./footer_subscribe.html" %} -->
+        {% include "./footer_copyright.html" %}
+      </div><!-- /.container -->
+    </footer>
+  </body>
+</html>

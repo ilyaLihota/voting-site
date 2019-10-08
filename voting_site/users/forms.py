@@ -13,7 +13,7 @@ class RegistrationForm(forms.ModelForm):
             "first_name",
             "last_name",
             "age",
-            "sex",
+            "gender",
         )
         widgets = {"password": forms.PasswordInput}
 

@@ -26,7 +26,7 @@ class User(AbstractUser):
     initial_secret_key = models.CharField(max_length=256)
 
     age = models.PositiveSmallIntegerField(default=0)
-    sex = models.CharField(max_length=10)
+    gender = models.CharField(max_length=10)
 
     def generate_key(self):
         key = "".join(

@@ -1,0 +1,31 @@
+<div class="table__user__polls">
+  {% if user_polls %}
+    <table class="table table-hover">
+      <caption>List of your polls</caption>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Status</th>
+            <th scope="col">Time</th>
+            <th scope="col">Creator</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for poll in user_polls %}
+            <tr>
+              <th scope="row">{{ poll.id }}</th>
+              <td><a href="{% url "poll_detail_url" id=poll.id %}">{{ poll.title }}</a></td>
+              <td>{{ poll.description | truncatechars:100}}</td>
+              <td>{{ poll.is_active }}</td>
+              <td>{{ poll.start_at }}-{{ poll.end_at }}</td>
+              <td>{{ poll.creator }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+  {% else %}
+    <p>There is no polls yet.</p>
+  {% endif %}
+</div>

@@ -2,13 +2,13 @@
   {% for poll in page_object %}
       <div class="{% if poll.is_big_card %}item-1
                   {% else %}item-2{% endif %}">
-        <a href="{% url "detail" id=poll.id %}" class="card">
+        <a href="{% url "poll_detail_url" id=poll.id %}" class="card">
           <div class="thumb" style="background-image: url({{ poll.picture.url }})"></div>
           <article>
             <h1>{{ poll.title }}</h1>
             <p>{{ poll.description | truncatechars:200 }}</p>
-            <span>{{ poll.start_time }}-{{ end_time }}</span>
-            <span>{{ poll.owner }}</span>
+            <span>{{ poll.start_at }}-{{ end_at }}</span>
+            <span>Created by {{ poll.creator }}</span>
           </article>
         </a>
       </div>

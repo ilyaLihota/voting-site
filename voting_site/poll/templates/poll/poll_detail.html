@@ -2,20 +2,20 @@
 <html lang="en" dir="ltr">
 <head>
   {% include "./head_html.html" %}
-  <title>{% block title %}Online voting | {{ id }}{% endblock title %}</title>
+  <title>{% block title %}Online voting | {{ poll.id }}{% endblock title %}</title>
 </head>
   <body>
-  
+
     <div class="container">
-      <img src="{{ picture.url }}" alt="...">
-      <h1>{{ title }}</h1>
-      <h2>{{ description }}</h2>
-      <h3>date_created: {{ date_created }}</h3>
-      <h3>start_time: {{ start_time }}</h3>
-      <h3>end_time: {{ end_time }}</h3>
-      <h3>status: {{ status }}</h3>
-      <h3>amount_of_questions: {{ amount_of_questions }}</h3>
-      <h3>owner: {{ owner }}</h3>
+      <img src="{{ poll.picture.url }}" alt="...">
+      <h1>{{ poll.title }}</h1>
+      <h2>{{ poll.description }}</h2>
+      <h3>date_created: {{ poll.created_at }}</h3>
+      <h3>start_time: {{ poll.start_at }}</h3>
+      <h3>end_time: {{ poll.end_at }}</h3>
+      <h3>status: {{ poll.is_active }}</h3>
+      <h3>amount_of_questions: {{ poll.amount_of_questions }}</h3>
+      <h3>owner: {{ poll.creator }}</h3>
     </div>
 
     <footer class="footer">

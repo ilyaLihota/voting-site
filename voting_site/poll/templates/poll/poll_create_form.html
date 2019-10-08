@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    {% include "./head_html.html" %}
+    <title>{% block title %}Create poll{% endblock title %}</title>
+  </head>
+  <body>
+
+    <!-- {% include "./header_inner.html" %} -->
+
+    <div class="container">
+      <form class="" action="{% url 'poll_create_url' %}" method="post">
+        {% csrf_token %}
+        {% for field in form %}
+          <div class="form-group">
+            {% if field.errors %}
+              <div class="alert alert-danger">
+                {{ field.errors }}
+              </div>
+            {% endif %}
+            {{ field.label }}
+            {{ field }}
+          </div>
+        {% endfor %}
+
+        <button type="submit" name="button" class="btn btn-primary">Create poll</button>
+      </form>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        {% include "./footer_about.html" %}
+        {% include "./footer_social.html" %}
+        {% include "./footer_subscribe.html" %}
+        {% include "./footer_copyright.html" %}
+      </div><!-- /.container -->
+    </footer>
+
+  </body>
+</html>
