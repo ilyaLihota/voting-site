@@ -1,22 +1,10 @@
+from datetime import date
 from django import forms
 from poll.models import *
 from django.core.exceptions import ValidationError
 
 
-class MySplitDateTimeWidget(forms.SplitDateTimeWidget):
-    def init(self, date_format='%d-%m-%d', time_format='%H:%M:%S'):
-        date_class = attrs.pop('date_class')
-        time_class = attrs.pop('time_class')
-
-        widgets = (
-            DateInput(attrs={'class' : date_class}, format=date_format),
-            TimeInput(attrs={'class' : time_class}, format=time_format)
-        )
-        # super(SplitDateTimeWidget, self).init(widgets, attrs)
-
 class PollForm(forms.ModelForm):
-    start_at = forms.SplitDateTimeField(widget=MySplitDateTimeWidget)
-    end_at = forms.SplitDateTimeField(widget=MySplitDateTimeWidget)
     class Meta:
         model = Poll
         fields = [
@@ -29,11 +17,10 @@ class PollForm(forms.ModelForm):
         ]
 
         widgets = {
-            'my_date_time_field': MySplitDateTimeWidget(),
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),
-            # 'start_at': forms.DateTimeInput(),
-            # 'end_at': forms.DateTimeInput(),
+            'start_at': forms.DateInput(format=('%d-%m-%Y %H:%M'), attrs={'type': 'datetime-local', 'localize': True}),
+            'end_at': forms.DateInput(format=('%d-%m-%Y %H:%M'), attrs={'type': 'datetime-local', 'localize': True}),
             'amount_of_questions': forms.NumberInput(attrs={'class': 'form-control'}),
         }
 

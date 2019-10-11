@@ -15,7 +15,15 @@ class RegistrationForm(forms.ModelForm):
             "age",
             "gender",
         )
-        widgets = {"password": forms.PasswordInput}
+        widgets = {
+            "username": forms.TextInput(attrs={'class': 'login__input', 'placeholder': 'Username', 'label': ''}),
+            "email": forms.EmailInput(attrs={'class': 'login__input', 'placeholder': 'Email'}),
+            "password": forms.PasswordInput(attrs={'class': 'login__input', 'placeholder': 'Password'}),
+            "first_name": forms.TextInput(attrs={'class': 'login__input', 'placeholder': 'Firstname'}),
+            "last_name": forms.TextInput(attrs={'class': 'login__input', 'placeholder': 'Lastname'}),
+            "age": forms.NumberInput(attrs={'class': 'login__input', 'placeholder': 'Age'}),
+            "gender": forms.Select(attrs={'class': 'login__input', 'placeholder': 'Gender'}),
+        }
 
         def save(self, commit=True):
             password = (

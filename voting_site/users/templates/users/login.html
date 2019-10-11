@@ -1,45 +1,21 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    {% include "poll/head_html.html" %}
-    <title>{% block title %}Online voting | Login{% endblock title %}</title>
-  </head>
-  <body>
-    
-    {% include "poll/header_inner.html" %}
+{% extends "poll/base_account.html" %}
 
-    <section class="section">
+{% block title %}Online voting | Login{% endblock title %}
 
-      <div class="login__form">
-        <h1 class="login__title">Вход</h1>
-        <div class="big-card form">
-          <form method="POST" action="{% url "login" %}">
-            {% csrf_token %}
-            {% if error %}
-            <div class="error">Something went wrong</div>
-            {% endif %}
+{% block content %}
+  <div class="login__form__container">
+    <form class="login__form" method="POST" action="{% url "login_url" %}">
+      {% csrf_token %}
 
-            <input placeholder="Username" name="username" type="text" class="text-input">
-            <input placeholder="Password" name="password" type="password" class="text-input">
+      <h1 class="login__form__title">Login</h1>
 
-            <input type="submit" class="submit-btn">
-          </form>
-        </div>
-        <!-- {% block nav %}
-          <nav class="nav">
-            <a class="nav__link-login" href="/users/register/">Register</a>
-          </nav>
-        {% endblock %} -->
-      </div>
+      {% if error %}
+        <div class="error">Something went wrong</div>
+      {% endif %}
 
-    </section>
-
-    <footer class="footer">
-      <div class="container">
-        {% include "poll/footer_about.html" %}
-        {% include "poll/footer_copyright.html" %}
-      </div><!-- /.container -->
-    </footer>
-
-  </body>
-</html>
+      <input placeholder="Username" name="username" type="text" class="login__input"/>
+      <input placeholder="Password" name="password" type="password" class="login__input"/>
+      <input type="submit" class="submit-btn">
+    </form>
+  </div>
+{% endblock content %}

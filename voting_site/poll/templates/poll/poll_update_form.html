@@ -1,0 +1,25 @@
+{% extends "poll/base_account.html" %}
+
+{% block title %}Edit poll "{{ poll.title|title }}"{% endblock title %}
+
+{% block content %}
+  <div class="container">
+    <form class="" action="{% url 'poll_update_url' poll_id=poll.id %}" method="post">
+      {% csrf_token %}
+
+      {% for field in form %}
+        <div class="form-group">
+          {% if field.errors %}
+            <div class="alert alert-danger">
+              {{ field.errors }}
+            </div>
+          {% endif %}
+          {{ field.label }}
+          {{ field }}
+        </div>
+      {% endfor %}
+
+      <button type="submit" name="button" class="btn btn-primary">Update poll</button>
+    </form>
+  </div>
+{% endblock content %}

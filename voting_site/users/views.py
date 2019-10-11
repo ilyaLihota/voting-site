@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, logout, login
 from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET
 
 from users.forms import RegistrationForm
@@ -23,9 +24,9 @@ def login_view(request):
             username=username,
             password=password,
         )
-        if user is not None:
+        if user:#!!!!
             login(request, user)
-            return redirect('/')
+            return redirect('account_url', user.id)
         else:
             try:
                 user = User.objects.get(username=username)

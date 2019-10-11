@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    {% include "./head_html.html" %}
+    <title>{% block title %}Account{% endblock title %}</title>
+  </head>
+  <body>
+
+    {% include "./account_header.html" %}
+
+    <div class="section">
+      {% block content %}Content here{% endblock content %}
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        {% include "./footer_about.html" %}
+        {% include "./footer_copyright.html" %}
+      </div>
+    </footer>
+  </body>
+</html>

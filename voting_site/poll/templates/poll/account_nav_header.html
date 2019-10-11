@@ -1,0 +1,17 @@
+<nav class="nav">
+  <a class="account__nav__link" href="{% url "poll_create_url" %}">
+    <i class="fas fa-plus fa-lg"></i>
+  </a>
+  <a class="account__nav__link" href="{% url "account_url" user.id %}">
+    <i class="fas fa-th-list fa-lg"></i>
+  </a>
+  <a class="account__nav__link" href="#">
+    <i class="fas fa-check-double fa-lg"></i>
+  </a>
+
+  {{ user.username }}
+  
+  <a class="account__nav__link" href="{% url "logout_url" %}">
+    <i class="fas fa-sign-out-alt fa-lg"></i>
+  </a>
+</nav>

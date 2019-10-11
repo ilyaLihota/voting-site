@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.views.generic import View
+from django.urls import reverse
 
 from .models import *
 from .forms import PollForm
@@ -72,6 +73,41 @@ class PollDetail(ObjectDetailMixin, View):
     template = 'poll/poll_detail.html'
 
 
+class PollUpdate(View):
+    def get(self, request, poll_id):
+        poll = get_object_or_404(Poll, pk=poll_id)
+        bound_form = PollForm(instance=poll)
+        return render(request, 'poll/poll_update_form.html', context={
+            'form': bound_form,
+            'poll': poll
+        })
+
+    def post(self, request, poll_id):
+        poll = get_object_or_404(Poll, pk=poll_id)
+        bound_form = PollForm(request.POST, instance=poll)
+
+        if bound_form.is_valid():
+            updated_poll = bound_form.save()
+            return redirect(updated_poll)
+        return render(request, 'poll/poll_update_form.html', context={
+            'form': bound_form,
+            'poll': poll
+        })
+
+
+class PollDelete(View):
+    def get(self, request, poll_id):
+        poll = get_object_or_404(Poll, pk=poll_id)
+        return render(request, 'poll/poll_delete_form.html', context={
+            'poll': poll
+        })
+
+    def post(self, request, poll_id):
+        poll = get_object_or_404(Poll, pk=poll_id)
+        poll.delete()
+        return redirect('/')
+
+
 def questions_create(request):
     if request.method == 'GET':
         form = QuestionForm()
@@ -86,10 +122,16 @@ def questions_create(request):
             new_question = bound_form.save()
             return redirect(new_question)
         return render(request, 'poll/question_create_form.html', context={
-            'form': bound_form,
+            'form': bound_form
         })
 
 
-def account(request):
-    user_polls = Poll.objects.all()
-    return render(request, 'poll/account.html', context={'user_polls': user_polls})
+def account(request, id=None):
+    user_polls = Poll.objects.filter(creator_id=id)
+
+    # print('id:', id)
+    # print(user_polls)
+
+    return render(request, 'poll/account.html', context={
+        'user_polls': user_polls
+    })
