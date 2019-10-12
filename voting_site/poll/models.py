@@ -1,4 +1,4 @@
-from datetime import datetime, date
+# from datetime import datetime, date
 from django.utils import timezone
 from django.db import models
 from users.models import User
@@ -7,11 +7,11 @@ from users.models import User
 class Poll(models.Model):
     title = models.CharField(max_length=255, unique=True)
     description = models.TextField(blank=True, db_index=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    start_at = models.DateTimeField(default=timezone.now, blank=True)
-    end_at = models.DateTimeField(default=timezone.now, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    start_at = models.DateField()
+    end_at = models.DateField()
     amount_of_questions = models.PositiveIntegerField(blank=True)
-    picture = models.ImageField(null=True, upload_to='images/polls/')
+    picture = models.ImageField(null=True, blank=True, upload_to='images/polls/')
     is_big_card = models.BooleanField(default=False)
     creator = models.ForeignKey(
         User,
@@ -22,11 +22,19 @@ class Poll(models.Model):
 
     @property
     def is_active(self):
-        self.now = date.today()
+        self.now = timezone.now()
         return self.start_at <= self.now <= self.end_at
+
+    @property
+    def questions(self):
+        return self.question_set.all()
 
     class Meta:
         ordering = ['-created_at']
+
+    # def save():
+    #
+    #     super().save()
 
     def __str__(self):
         return self.title
@@ -34,13 +42,17 @@ class Poll(models.Model):
 
 class Question(models.Model):
     title = models.TextField(db_index=True)
-    amount_of_answers = models.PositiveSmallIntegerField()
+    amount_of_choices = models.PositiveSmallIntegerField()
     poll = models.ForeignKey(
         Poll,
         null=True,
         related_name='questions',
         on_delete=models.CASCADE
     )
+
+    @property
+    def choices(self):
+        return self.choice_set.all()
 
     def __str__(self):
         return self.title
@@ -65,6 +77,7 @@ class Answer(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(
         'users.User',
+        null=True,
         related_name='users',
         on_delete=models.CASCADE
 

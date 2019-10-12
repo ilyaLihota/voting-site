@@ -1,40 +1,50 @@
-<div class="table__user__polls">
-  {% if user_polls %}
-  <h3>List of your polls</h3>
+<div class="container">
+
+  <div class="">
+    <a class="account__nav__link" href="{% url "poll_create_url" user.id %}">
+      <h6>create poll</h6>
+      <i class="fas fa-plus fa-lg"></i>
+    </a>
+  </div>
+
+  <div class="table__user__polls">
+    {% if user_polls %}
+    <h3>List of your polls</h3>
     <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Title</th>
-            <th scope="col">Description</th>
-            <th scope="col">Status</th>
-            <!-- <th scope="col">Time</th> -->
-            <th scope="col">Creator</th>
-            <th scope="col">Edit / delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for poll in user_polls %}
-            <tr>
-              <th scope="row">{{ poll.id }}</th>
-              <td><a href="{% url "poll_detail_url" id=poll.id %}">{{ poll.title }}</a></td>
-              <td>{{ poll.description | truncatechars:100}}</td>
-              <td> poll.is_active </td>
-              <!-- <td>{{ poll.start_at }}-{{ item.end_at }}</td> -->
-              <td>{{ poll.creator }}</td>
-              <td>
-                <a class="account__nav__link" href="{% url "poll_update_url" poll_id=poll.id %}">
-                  <i class="fas fa-pen"></i>
-                </a>
-                <a class="account__nav__link" href="{% url "poll_delete_url" poll_id=poll.id %}">
-                  <i class="fas fa-trash"></i>
-                </a>
-              </td>
-            </tr>
-          {% endfor %}
-        </tbody>
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Description</th>
+          <th scope="col">Status</th>
+          <th scope="col">Time</th>
+          <th scope="col">Creator</th>
+          <th scope="col">Edit / delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for poll in user_polls %}
+        <tr>
+          <th scope="row">{{ poll.id }}</th>
+          <td><a href="{% url "poll_detail_url" id=poll.id %}">{{ poll.title }}</a></td>
+          <td>{{ poll.description | truncatechars:100}}</td>
+          <td> poll.is_active </td>
+          <td>{{ poll.start_at }}-{{ poll.end_at }}</td>
+          <td>{{ poll.creator }}</td>
+          <td>
+            <a class="account__nav__link" href="{% url "poll_update_url" poll_id=poll.id %}">
+              <i class="fas fa-pen"></i>
+            </a>
+            <a class="account__nav__link" href="{% url "poll_delete_url" poll_id=poll.id %}">
+              <i class="fas fa-trash"></i>
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
     </table>
-  {% else %}
+    {% else %}
     <p>There is no polls yet :(</p>
-  {% endif %}
+    {% endif %}
+  </div>
 </div>

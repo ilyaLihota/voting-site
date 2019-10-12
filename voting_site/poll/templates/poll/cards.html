@@ -3,7 +3,9 @@
       <div class="{% if poll.is_big_card %}item-1
                   {% else %}item-2{% endif %}">
         <a href="{% url "poll_detail_url" id=poll.id %}" class="card">
-          <div class="thumb" style="background-image: url({{ poll.picture.url }})"></div>
+          {% if poll.picture %}
+            <div class="thumb" style="background-image: url({{ poll.picture.url }})"></div>
+          {% endif %}
           <article>
             <h1>{{ poll.title }}</h1>
             <p>{{ poll.description | truncatechars:200 }}</p>

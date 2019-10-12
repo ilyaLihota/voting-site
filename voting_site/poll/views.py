@@ -2,11 +2,13 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.views.generic import View
+from django.views.decorators.http import require_GET, require_POST
 from django.urls import reverse
 
 from .models import *
 from .forms import PollForm
-from .utils import ObjectDetailMixin
+from .forms import BaseQuestionFormset, QuestionFormset
+# from .utils import ObjectDetailMixin
 
 
 def pagination(polls, page_number):
@@ -52,25 +54,30 @@ def polls_list(request):
     return render(request, 'poll/main.html', context=pagination(polls, page_number))
 
 
-def poll_create(request):
+def poll_create(request, user_id):
+    creator = get_object_or_404(User, id=user_id)
+
     if request.method == 'GET':
         form = PollForm()
-        return render(request, 'poll/poll_create_form.html', context={
-            'form': form,
-        })
+
     elif request.method == 'POST':
-        bound_form = PollForm(request.POST)
-        if bound_form.is_valid():
-            new_poll = bound_form.save()
-            return redirect(new_poll)
-        return render(request, 'poll/poll_create_form.html', context={
-            'form': bound_form,
+        form = PollForm(request.POST)
+        if form.is_valid():
+            new_poll = form.save(commit=False)
+            new_poll.creator = creator
+            new_poll.save()
+            return redirect(reverse('poll_detail_url', kwargs={'id': new_poll.id}))
+
+    context={'user': creator, 'form': form}
+    return render(request, 'poll/poll_create_form.html', context)
+
+
+class PollDetail(View):
+    def get(self, request, id=None):
+        poll = get_object_or_404(Poll, id=id)
+        return render(request, 'poll/poll_detail.html', context={
+            'poll': poll
         })
-
-
-class PollDetail(ObjectDetailMixin, View):
-    model = Poll
-    template = 'poll/poll_detail.html'
 
 
 class PollUpdate(View):
@@ -88,7 +95,8 @@ class PollUpdate(View):
 
         if bound_form.is_valid():
             updated_poll = bound_form.save()
-            return redirect(updated_poll)
+            return redirect(reverse('account_url', kwargs={'user_id': updated_poll.creator_id}))
+
         return render(request, 'poll/poll_update_form.html', context={
             'form': bound_form,
             'poll': poll
@@ -104,8 +112,10 @@ class PollDelete(View):
 
     def post(self, request, poll_id):
         poll = get_object_or_404(Poll, pk=poll_id)
+        user = get_object_or_404(User, id=poll.creator_id)
         poll.delete()
-        return redirect('/')
+
+        return redirect(reverse('account_url', kwargs={'user_id': user.id}))
 
 
 def questions_create(request):
@@ -126,12 +136,36 @@ def questions_create(request):
         })
 
 
-def account(request, id=None):
-    user_polls = Poll.objects.filter(creator_id=id)
+class QuestionDetail(View):
+    def get(self, request, question_id=None):
+        question = get_object_or_404(Question, pk=question_id)
+        return render(request, 'poll/question_detail.html', context={
+            'question': question
+        })
 
-    # print('id:', id)
-    # print(user_polls)
 
-    return render(request, 'poll/account.html', context={
-        'user_polls': user_polls
+def account(request, user_id=None):
+    user = get_object_or_404(User, id=user_id)
+    user_polls = Poll.objects.filter(creator_id=user_id)
+    context = {'user': user, 'user_polls': user_polls}
+
+    return render(request, 'poll/account.html', context)
+
+
+def manage_question(request, poll_id):
+    """Edit question and their choices for a single poll."""
+
+    poll = get_object_or_404(Poll, id=poll_id)
+    Question
+    if request.method == 'POST':
+        formset = QuestionFormset(request.POST, instance=poll)
+        if formset.is_valid():
+            formset.save()
+            return redirect('poll_detail_url', poll_id=poll.id)
+    else:
+        formset = QuestionFormset(instance=poll)
+
+    return render(request, 'poll/question_choices_create.html', context={
+        'poll': poll,
+        'question_formset': formset
     })

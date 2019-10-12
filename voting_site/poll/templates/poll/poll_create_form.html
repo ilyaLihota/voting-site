@@ -4,9 +4,9 @@
 
 {% block content %}
   <div class="container">
-    <form class="" action="{% url 'poll_create_url' %}" method="post">
+    <form class="" action="{% url "poll_create_url" user.id %}" method="post">
       {% csrf_token %}
-      
+
       {% for field in form %}
         <div class="form-group">
           {% if field.errors %}

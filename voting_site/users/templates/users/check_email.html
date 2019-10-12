@@ -1,11 +1,10 @@
-{% extends "users/base_users.html" %}
+{% extends "poll/base_account.html" %}
 
 {% block title %}Успешно зарегистрированы{% endblock %}
 
 {% block content %}
    <h1>Успешно зарегистрированы</h1>
    <div class="big-card info">
-       Вы успешно зарегистрировали пользователя {{ user.username }}.
-       Чтобы завершить процедуру регистрации, перейдите по ссылке в письме, что было выслано на ваш почтовый ящик: {{ user.email }}
+       Вы успешно зарегистрировали пользователя {{ user.username }} :)
    </div>
 {% endblock %}

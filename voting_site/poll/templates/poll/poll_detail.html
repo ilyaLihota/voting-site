@@ -4,14 +4,47 @@
 
 {% block content %}
   <div class="container">
-    <img src="{{ poll.picture.url }}" alt="...">
-    <h1>{{ poll.title }}</h1>
-    <h2>{{ poll.description }}</h2>
-    <h3>date_created: {{ poll.created_at }}</h3>
-    <h3>start_time: {{ poll.start_at }}</h3>
-    <h3>end_time: {{ poll.end_at }}</h3>
-    <!-- <h3>status:  poll.is_active </h3> -->
-    <h3>amount_of_questions: {{ poll.amount_of_questions }}</h3>
-    <h3>owner: {{ poll.creator }}</h3>
+
+    <div class="">
+      <a class="account__nav__link" href="{% url "question_choices_create_url" poll_id=poll.id %}">
+        <h6>create question</h6>
+        <i class="fas fa-plus fa-lg"></i>
+      </a>
+    </div>
+
+    <div class="table__user__polls">
+      {% if poll.questions.all %}
+      <h4>List of questions for poll "{{ poll.title }}"</h4>
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Amount of choices</th>
+                <th scope="col">Edit / delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for question in poll.questions.all %}
+                <tr>
+                  <th scope="row">{{ question.id }}</th>
+                  <td><a href="{% url "question_detail_url" question_id=question.id %}">{{ question.title }}</a></td>
+                  <td>{{ question.amount_of_choices}}</td>
+                  <td>
+                    <a class="account__nav__link" href="{% url "poll_update_url" poll_id=poll.id %}">
+                      <i class="fas fa-pen"></i>
+                    </a>
+                    <a class="account__nav__link" href="{% url "poll_delete_url" poll_id=poll.id %}">
+                      <i class="fas fa-trash"></i>
+                    </a>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+      {% else %}
+        <p>There is no questions yet :(</p>
+      {% endif %}
+    </div>
   </div>
 {% endblock content %}

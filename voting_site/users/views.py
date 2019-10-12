@@ -20,12 +20,22 @@ def login_view(request):
     elif request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
+
+        # print(username)
+        # print(password)
+
         user = authenticate(
             username=username,
-            password=password,
+            password=password
         )
-        if user:#!!!!
+
+        # print(user.id)
+
+        if user is not None:
             login(request, user)
+
+            current_user = request.user
+
             return redirect('account_url', user.id)
         else:
             try:
@@ -37,7 +47,7 @@ def login_view(request):
             except User.DoesNotExist:
                 pass
             return render(request, 'users/login.html', context={
-            'error': True
+                'error': True
             })
 
 def register(request):
@@ -46,19 +56,19 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            user.verify_email()
-            return render(request, 'check_email.html')
+            # user.verify_email()
+            return render(request, 'users/check_email.html')
     else:
         form = RegistrationForm()
     return render(request, 'users/register.html', context={
         'form': form,
     })
 
-@require_GET
-def verify_email(request):
-    key = request.GET.get('key')
-    if request.user.check_key(key):
-        request.user.is_email_verified = True
-        request.user.save()
-        return render(request, 'account_activated.html')
-    return redirect('/')
+# @require_GET
+# def verify_email(request):
+#     key = request.GET.get('key')
+#     if request.user.check_key(key):
+#         request.user.is_email_verified = True
+#         request.user.save()
+#         return render(request, 'account_activated.html')
+#     return redirect('/')
