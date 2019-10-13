@@ -42,7 +42,7 @@ class Poll(models.Model):
 
 class Question(models.Model):
     title = models.TextField(db_index=True)
-    amount_of_choices = models.PositiveSmallIntegerField()
+    # amount_of_choices = models.PositiveSmallIntegerField(null=True)
     poll = models.ForeignKey(
         Poll,
         null=True,
@@ -53,6 +53,10 @@ class Question(models.Model):
     @property
     def choices(self):
         return self.choice_set.all()
+
+    @property
+    def amount_of_choices(self):
+        return self.choices.count()
 
     def __str__(self):
         return self.title

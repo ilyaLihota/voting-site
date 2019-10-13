@@ -1,0 +1,25 @@
+{% extends "poll/base_account.html" %}
+
+{% block title %}Edit choice{% endblock title %}
+
+{% block content %}
+  <div class="container">
+    <form class="" action="{% url "choice_update_url" choice.id %}" method="post">
+      {% csrf_token %}
+
+      {% for field in form %}
+        <div class="form-group">
+          {% if field.errors %}
+            <div class="alert alert-danger">
+              {{ field.errors }}
+            </div>
+          {% endif %}
+          {{ field.label }}
+          {{ field }}
+        </div>
+      {% endfor %}
+
+      <button type="submit" name="button" class="btn btn-primary">Update choice</button>
+    </form>
+  </div>
+{% endblock content %}

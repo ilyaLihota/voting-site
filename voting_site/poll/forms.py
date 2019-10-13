@@ -100,3 +100,13 @@ class QuestionForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
         }
+
+
+class ChoiceForm(forms.ModelForm):
+    class Meta:
+        model = Choice
+        fields = ['title']
+
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+        }

@@ -12,7 +12,13 @@ urlpatterns = [
     path('polls/delete/<int:poll_id>/', views.PollDelete.as_view(), name='poll_delete_url'),
 
     path('questions/<int:question_id>/', views.QuestionDetail.as_view(), name='question_detail_url'),
-    path('<int:poll_id>/question_choices/create/', views.manage_question, name='question_choices_create_url'),
+    path('questions/create/<int:poll_id>/', views.QuestionCreate.as_view(), name='question_create_url'),
+    path('questions/update/<int:question_id>/', views.QuestionUpdate.as_view(), name='question_update_url'),
+    path('questions/delete/<int:question_id>/', views.QuestionDelete.as_view(), name='question_delete_url'),
+
+    path('choices/create/<int:question_id>/', views.ChoiceCreate.as_view(), name='choice_create_url'),
+    path('choices/update/<int:choice_id>/', views.ChoiceUpdate.as_view(), name='choice_update_url'),
+    path('choices/delete/<int:choice_id>/', views.ChoiceDelete.as_view(), name='choice_delete_url'),
 
     # path('take_poll/<int:poll_id>/', views.TakePoll.as_view(), name='take_poll_url'),
 

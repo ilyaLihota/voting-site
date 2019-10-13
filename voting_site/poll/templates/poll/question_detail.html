@@ -4,6 +4,14 @@
 
 {% block content %}
   <div class="container">
+
+    <div class="account__header__inner">
+      <a class="account__nav__link" href="{% url "choice_create_url" question.id %}">
+        <i class="fas fa-plus fa-lg"></i>
+        <div class="add__btn">add choice</div>
+      </a>
+    </div>
+
     <div class="table__user__polls">
       {% if question.choices.all %}
       <h4>List of choices for question "{{ question.title }}"</h4>
@@ -13,7 +21,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
                 <th scope="col">Made at</th>
-                <th scope="col">Delete</th>
+                <th scope="col">Edit / Delete</th>
               </tr>
             </thead>
             <tbody>
@@ -23,10 +31,10 @@
                   <td>{{ choice.title }}</td>
                   <td>{{ choice.made_at}}</td>
                   <td>
-                    <!-- <a class="account__nav__link" href="#">
+                    <a class="account__nav__link" href="{% url "choice_update_url" choice.id %}">
                       <i class="fas fa-pen"></i>
-                    </a> -->
-                    <a class="account__nav__link" href="#">
+                    </a>
+                    <a class="account__nav__link" href="{% url "choice_delete_url" choice.id %}">
                       <i class="fas fa-trash"></i>
                     </a>
                   </td>
