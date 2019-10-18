@@ -19,7 +19,8 @@
         </div>
       {% endfor %}
 
-      <button type="submit" name="button" class="btn btn-primary">Create question</button>
+      <button type="submit" name="button" class="subscribe_btn">Create question</button>
+      <a href="{% url "poll_detail_url" poll.id %}">Cancel</a>
     </form>
   </div>
 {% endblock content %}

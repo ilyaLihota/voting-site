@@ -136,8 +136,8 @@ STATICFILES_DIRS = [
 ]
 
 ADMIN_MEDIA_PREFIX = '/static/admin/'
-MEDIA_ROOT = 'uploads/'
-MEDIA_URL = '/uploads/'
+MEDIA_ROOT = 'uploads/img/'
+MEDIA_URL = '/uploads/img/'
 
 EMAIL_HOST = 'smtp.mailgun.org'
 EMAIL_PORT = 587

@@ -19,7 +19,8 @@
         </div>
       {% endfor %}
 
-      <button type="submit" name="button" class="btn btn-primary">Update poll</button>
+      <button type="submit" name="button" class="subscribe_btn">Update poll</button>
+      <a class="cancel__btn" href="{% url "account_url" user.id %}">Cancel</a>
     </form>
   </div>
 {% endblock content %}

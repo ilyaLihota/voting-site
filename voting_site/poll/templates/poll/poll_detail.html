@@ -6,15 +6,19 @@
   <div class="container">
 
     <div class="account__header__inner">
+      <a class="account__nav__link" href="{% url "account_url" user.id %}">
+        <i class="fas fa-chevron-circle-left fa-lg"></i>
+        <div class="add__btn">to polls</div>
+      </a>
       <a class="account__nav__link" href="{% url "question_create_url" poll.id %}">
-        <i class="fas fa-plus fa-lg"></i>
         <div class="add__btn">add question</div>
+        <i class="fas fa-plus-circle fa-lg"></i>
       </a>
     </div>
 
     <div class="table__user__polls">
       {% if poll.questions.all %}
-      <h4>List of questions for poll "{{ poll.title }}"</h4>
+      <h4>The questions for poll "{{ poll.title }}"</h4>
         <table class="table table-hover">
             <thead>
               <tr>

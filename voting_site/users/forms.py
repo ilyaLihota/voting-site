@@ -16,7 +16,7 @@ class RegistrationForm(forms.ModelForm):
             "gender",
         )
         widgets = {
-            "username": forms.TextInput(attrs={'class': 'login__input', 'placeholder': 'Username', 'label': ''}),
+            "username": forms.TextInput(attrs={'class': 'login__input', 'placeholder': 'Username'}),
             "email": forms.EmailInput(attrs={'class': 'login__input', 'placeholder': 'Email'}),
             "password": forms.PasswordInput(attrs={'class': 'login__input', 'placeholder': 'Password'}),
             "first_name": forms.TextInput(attrs={'class': 'login__input', 'placeholder': 'Firstname'}),
@@ -25,10 +25,9 @@ class RegistrationForm(forms.ModelForm):
             "gender": forms.Select(attrs={'class': 'login__input', 'placeholder': 'Gender'}),
         }
 
-        def save(self, commit=True):
-            password = (
-                make_password(self.cleaned_data['password'])
-            )
-            self.instance.password = password
-            self.cleaned_data['password'] = password
-            return super().save(commit)
+    def save(self, commit=True):
+        password = (make_password(self.cleaned_data['password']))
+        self.instance.password = password
+        self.cleaned_data['password'] = password
+
+        return super().save(commit)

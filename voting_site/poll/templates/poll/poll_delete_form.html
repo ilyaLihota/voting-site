@@ -4,12 +4,12 @@
 
 {% block content %}
   <div class="container">
-    <form class="" action="{% url 'poll_delete_url' poll_id=poll.id %}" method="post">
+    <form action="{% url 'poll_delete_url' poll_id=poll.id %}" method="post">
       {% csrf_token %}
 
-      <h3>Are you sure you want to delete poll {{ poll.title|title }}?</h3>
-      <a href="{% url "account_url" user.id %}">Cancel</a>
-      <button type="submit" name="button" class="btn btn-primary">Delete</button>
+      <h3>Are you sure you want to delete poll "{{ poll.title|title }}"?</h3>
+      <button type="submit" name="button" class="subscribe_btn">Delete</button>
+      <a class="cancel__btn" href="{% url "account_url" user.id %}">Cancel</a>
     </form>
   </div>
 {% endblock content %}

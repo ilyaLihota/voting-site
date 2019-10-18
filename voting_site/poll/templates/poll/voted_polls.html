@@ -1,0 +1,45 @@
+{% extends "./base_account.html" %}
+
+{% block title %}Online voting | {{ poll.id }}{% endblock title %}
+
+{% block content %}
+  <div class="container">
+
+    <div class="account__header__inner">
+      <a class="account__nav__link" href="{% url "account_url" user.id %}">
+        <i class="fas fa-chevron-circle-left fa-lg"></i>
+        <div class="add__btn">to polls</div>
+      </a>
+    </div>
+
+    <div class="table__user__polls">
+      {% if polls %}
+        <h4>Your voted polls</h4>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Start at</th>
+                <th scope="col">End at</th>
+                <th scope="col">Created at</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for poll, value in polls.items %}
+                <tr>
+                  <th scope="row">{{ poll.id }}</th>
+                  <td>{{ poll.title }}</td>
+                  <td>{{ poll.start_at }}</td>
+                  <td>{{ poll.end_at }}</td>
+                  <td>{{ value }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+      {% else %}
+        <p>There is no voted polls yet :(</p>
+      {% endif %}
+    </div>
+  </div>
+{% endblock content %}

@@ -3,22 +3,29 @@
 {% block title %}Online voting | {{ question.id }}{% endblock title %}
 
 {% block content %}
+
   <div class="container">
-    {{ question_formset.managment_form }}
-    {{ question_formset.non_form_errors }}
+    <form class="" action="{% url "take_poll_url" poll.id %}" method="post">
+      {% csrf_token %}
 
-    {% for question_form in question_formset.forms %}
-      {{ question_form.as_p }}
+      {{ question_formset.managment_form }}
+      {{ question_formset.non_form_errors }}
 
-      {% if question_form.nested %}
-        {{ question_form.nested.managment_form }}
-        {{ question_form.nested.non_form_errors }}
+      {% for question_form in question_formset.forms %}
+        {{ question_form.as_p }}
 
-        {% for nested_form in question_form.nested.forms %}
-          {{ nested_form.as_p }}
-        {% endfor %}
+        {% if question_form.nested %}
+          {{ question_form.nested.managment_form }}
+          {{ question_form.nested.non_form_errors }}
 
-      {% endif %}
-    {% endfor %}
+          {% for nested_form in question_form.nested.forms %}
+            {{ nested_form.as_p }}
+          {% endfor %}
+
+        {% endif %}
+      {% endfor %}
+
+      <button type="submit" name="button" class="btn btn-primary">Submit</button>
+    </form>
   </div>
 {% endblock content %}

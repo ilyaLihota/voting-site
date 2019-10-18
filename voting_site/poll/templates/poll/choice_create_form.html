@@ -19,7 +19,8 @@
         </div>
       {% endfor %}
 
-      <button type="submit" name="button" class="btn btn-primary">Create choice</button>
+      <button type="submit" name="button" class="subscribe_btn">Create choice</button>
+      <a class="cancel__btn" href="{% url "question_detail_url" question.id %}">Cancel</a>
     </form>
   </div>
 {% endblock content %}

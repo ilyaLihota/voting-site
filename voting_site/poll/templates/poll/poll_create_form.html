@@ -7,6 +7,8 @@
     <form class="" action="{% url "poll_create_url" user.id %}" method="post">
       {% csrf_token %}
 
+      <h2>Creating a poll</h2>
+
       {% for field in form %}
         <div class="form-group">
           {% if field.errors %}
@@ -14,12 +16,15 @@
               {{ field.errors }}
             </div>
           {% endif %}
+
           {{ field.label }}
           {{ field }}
+          
         </div>
       {% endfor %}
 
-      <button type="submit" name="button" class="btn btn-primary">Create poll</button>
+      <button type="submit" name="button" class="subscribe_btn">Create poll</button>
+      <a class="cancel__btn" href="{% url "account_url" user.id %}">Cancel</a>
     </form>
   </div>
 {% endblock content %}

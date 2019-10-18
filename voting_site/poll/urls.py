@@ -6,8 +6,9 @@ from poll import views
 urlpatterns = [
     path('', views.polls_list, name='polls_list_url'),
     path('accounts/<int:user_id>/', views.account, name='account_url'),
+
     path('polls/<int:id>/', views.PollDetail.as_view(), name='poll_detail_url'),
-    path('polls/create/<int:user_id>/', views.poll_create, name='poll_create_url'),
+    path('polls/create/<int:user_id>/', views.PollCreate.as_view(), name='poll_create_url'),
     path('polls/update/<int:poll_id>/', views.PollUpdate.as_view(), name='poll_update_url'),
     path('polls/delete/<int:poll_id>/', views.PollDelete.as_view(), name='poll_delete_url'),
 
@@ -20,7 +21,10 @@ urlpatterns = [
     path('choices/update/<int:choice_id>/', views.ChoiceUpdate.as_view(), name='choice_update_url'),
     path('choices/delete/<int:choice_id>/', views.ChoiceDelete.as_view(), name='choice_delete_url'),
 
-    # path('take_poll/<int:poll_id>/', views.TakePoll.as_view(), name='take_poll_url'),
+    path('take_poll/<int:poll_id>/', views.TakePoll.as_view(), name='take_poll_url'),
+
+    path('result/<int:poll_id>/', views.Result.as_view(), name='result_url'),
+    path('voted/', views.Voted.as_view(), name='voted_url'),
 
     path('search/', views.search, name='search'),
 ]

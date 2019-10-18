@@ -1,9 +1,9 @@
 <nav class="nav">
   <a class="account__nav__link" href="{% url "account_url" user.id %}">
-    <i class="fas fa-th-list fa-lg"></i>
+    <i class="fas fa-list fa-lg"></i>
   </a>
-  <a class="account__nav__link" href="#">
-    <i class="fas fa-check-double fa-lg"></i>
+  <a class="account__nav__link" href="{% url "voted_url" %}">
+    <i class="fas fa-vote-yea fa-lg"></i>
   </a>
 
   {{ user.username }}

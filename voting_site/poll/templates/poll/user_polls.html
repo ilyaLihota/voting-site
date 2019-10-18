@@ -1,25 +1,31 @@
 <div class="container">
 
   <div class="account__header__inner">
-      <a class="account__nav__link" href="{% url "poll_create_url" user.id %}">
-        <i class="fas fa-plus fa-lg"></i>
-        <div class="add__btn">add poll</div>
-      </a>
+    <a class="account__nav__link" href="{% url "polls_list_url" %}">
+      <i class="fas fa-chevron-circle-left fa-lg"></i>
+      <div class="add__btn">to main</div>
+    </a>
+    <a class="account__nav__link" href="{% url "poll_create_url" user.id %}">
+      <div class="add__btn">add poll</div>
+      <i class="fas fa-plus-circle fa-lg"></i>
+    </a>
   </div>
 
   <div class="table__user__polls">
     {% if user_polls %}
-    <h3>List of your polls</h3>
+    <h3>The polls you created</h3>
     <table class="table table-hover">
       <thead>
         <tr>
           <th scope="col">#</th>
           <th scope="col">Title</th>
           <th scope="col">Description</th>
+          <th scope="col">Questions</th>
+          <th scope="col">Start</th>
+          <th scope="col">End</th>
           <th scope="col">Status</th>
-          <th scope="col">Time</th>
-          <th scope="col">Creator</th>
           <th scope="col">Edit / delete</th>
+          <th scope="col">Results</th>
         </tr>
       </thead>
       <tbody>
@@ -27,16 +33,26 @@
         <tr>
           <th scope="row">{{ poll.id }}</th>
           <td><a href="{% url "poll_detail_url" id=poll.id %}">{{ poll.title }}</a></td>
-          <td>{{ poll.description | truncatechars:100}}</td>
-          <td> poll.is_active </td>
-          <td>{{ poll.start_at }}-{{ poll.end_at }}</td>
-          <td>{{ poll.creator }}</td>
+          <td>{{ poll.description | truncatechars:100 }}</td>
+          <td>{{ poll.amount_of_questions }}</td>
+          <td>{{ poll.start_at }}</td>
+          <td>{{ poll.end_at }}</td>
+          {% if poll.is_active %}
+            <td>active</td>
+          {% else %}
+            <td> not active</td>
+          {% endif %}
           <td>
             <a class="account__nav__link" href="{% url "poll_update_url" poll_id=poll.id %}">
               <i class="fas fa-pen"></i>
             </a>
             <a class="account__nav__link" href="{% url "poll_delete_url" poll_id=poll.id %}">
               <i class="fas fa-trash"></i>
+            </a>
+          </td>
+          <td>
+            <a class="account__nav__link" href="{% url "result_url" poll_id=poll.id %}">
+              <i class="fas fa-poll fa-lg"></i>
             </a>
           </td>
         </tr>

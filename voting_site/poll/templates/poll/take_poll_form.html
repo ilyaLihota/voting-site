@@ -1,0 +1,38 @@
+{% extends "poll/base_account.html" %}
+
+{% block title %}Take a poll{% endblock title %}
+
+{% block content %}
+  <div class="container">
+    <div class="account__header__inner">
+      <a class="account__nav__link" href="{% url "polls_list_url" %}">
+        <i class="fas fa-chevron-circle-left fa-lg"></i>
+        <div class="add__btn">to polls</div>
+      </a>
+    </div>
+    <h2>{{ poll.title }}</h2>
+    <span>{{ poll.description }}</span>
+      <div class="band">
+        {% for key, value in context.items %}
+          {% if value.1 %}
+            <div class="item-2">
+              <div class="answer__form__card">
+                <h3>{{ value.0 }}</h3>
+                <form class="" action="{% url "take_poll_url" poll.id %}" method="post">
+                  {% csrf_token %}
+
+                  {% for choice in value.1 %}
+                    <p>
+                      <input id="radio_btn" name="radio_btn" type="radio" value="{{ choice }}"/>
+                      <label for="l_name">{{ choice }}</label>
+                    </p>
+                  {% endfor %}
+                  <button type="submit" name="button" class="subscribe_btn">Submit</button>
+                </form>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+  </div>
+{% endblock content %}

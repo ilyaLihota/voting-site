@@ -1,18 +1,31 @@
 <div class="band">
   {% for poll in page_object %}
+    {% if poll.is_active %}
       <div class="{% if poll.is_big_card %}item-1
                   {% else %}item-2{% endif %}">
-        <a href="{% url "poll_detail_url" id=poll.id %}" class="card">
+        <div class="card">
           {% if poll.picture %}
             <div class="thumb" style="background-image: url({{ poll.picture.url }})"></div>
+            <img src="{{ poll.picture }}" alt="">
           {% endif %}
+
           <article>
-            <h1>{{ poll.title }}</h1>
-            <p>{{ poll.description | truncatechars:200 }}</p>
-            <span>{{ poll.start_at }}-{{ end_at }}</span>
+            <h1>{{ poll.title.upper }}</h1>
+            <p>{{ poll.description | truncatechars:100 }}</p>
+            <span>{{ poll.start_at }}-{{ poll.end_at }}</span>
             <span>Created by {{ poll.creator }}</span>
+
+            {% if request.user.is_authenticated %}
+              <div class="take_poll">
+                <a class="take_poll__btn" href="{% url "take_poll_url" poll.id %}">
+                  Take a poll
+                </a>
+                <i class="fas fa-chevron-right"></i>
+              </div>
+            {% endif %}
           </article>
-        </a>
+        </div>
       </div>
+    {% endif %}
   {% endfor %}
 </div>

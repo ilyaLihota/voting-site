@@ -28,7 +28,6 @@ class Migration(migrations.Migration):
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('start_at', models.DateField()),
                 ('end_at', models.DateField()),
-                # ('status', models.CharField(default='inactive', max_length=255)),
                 ('amount_of_questions', models.PositiveIntegerField(blank=True)),
                 ('picture', models.ImageField(
                     null=True,

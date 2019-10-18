@@ -4,9 +4,9 @@
       <a href="/" class="header__logo">ONLINE VOTING</a>
       <nav class="nav">
         {% if user.is_authenticated %}
+          <span class="header__user_id">{{ user.username }}</span> 
           <a class="nav__link" href="{% url "account_url" user.id %}">
-            {{ user.username }}
-            <i class="fas fa-user fa-lg"></i>
+            <i class="fas fa-user-circle fa-lg"></i>
           </a>
           <a class="nav__link" href="{% url "logout_url" %}">
             <i class="fas fa-sign-out-alt fa-lg"></i>
