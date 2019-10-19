@@ -1,19 +1,21 @@
 <div class="container">
 
   <div class="account__header__inner">
-    <a class="account__nav__link" href="{% url "polls_list_url" %}">
+    <a class="navigation__btn" href="{% url "polls_list_url" %}">
       <i class="fas fa-chevron-circle-left fa-lg"></i>
-      <div class="add__btn">to main</div>
+      <div class="navigation__btn__text">to main</div>
     </a>
-    <a class="account__nav__link" href="{% url "poll_create_url" user.id %}">
-      <div class="add__btn">add poll</div>
+    <a class="navigation__btn" href="{% url "poll_create_url" user.id %}">
+      <div class="navigation__btn__text">add poll</div>
       <i class="fas fa-plus-circle fa-lg"></i>
     </a>
   </div>
 
   <div class="table__user__polls">
     {% if user_polls %}
-    <h3>The polls you created</h3>
+      <div class="title__forms">
+        The polls you created
+      </div>
     <table class="table table-hover">
       <thead>
         <tr>
@@ -60,7 +62,9 @@
       </tbody>
     </table>
     {% else %}
-    <p>There is no polls yet :(</p>
+      <div class="title__center__light">
+        There is no polls yet :(
+      </div>
     {% endif %}
   </div>
 </div>

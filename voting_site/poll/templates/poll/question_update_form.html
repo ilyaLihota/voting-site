@@ -7,6 +7,10 @@
     <form class="" action="{% url "question_update_url" question.id %}" method="post">
       {% csrf_token %}
 
+      <div class="title__forms">
+        Updating the question "{{ question.title }}"
+      </div>
+
       {% for field in form %}
         <div class="form-group">
           {% if field.errors %}

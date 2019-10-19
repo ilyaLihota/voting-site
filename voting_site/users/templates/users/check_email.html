@@ -3,8 +3,15 @@
 {% block title %}Успешно зарегистрированы{% endblock %}
 
 {% block content %}
-   <h1>Успешно зарегистрированы</h1>
-   <div class="big-card info">
-       Вы успешно зарегистрировали пользователя {{ user.username }} :)
-   </div>
+  <div class="container">
+    <div class="account__header__inner">
+      <a class="account__nav__link" href="{% url "polls_list_url" %}">
+        <i class="fas fa-chevron-circle-left fa-lg"></i>
+        <div class="add__btn">to main</div>
+      </a>
+    </div>
+    <div class="title__center">
+      Вы успешно зарегистрировали пользователя {{ user.username }} :)
+    </div>
+  </div>
 {% endblock %}

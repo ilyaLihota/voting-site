@@ -7,6 +7,10 @@
     <form class="" action="{% url "question_create_url" poll.id %}" method="post">
       {% csrf_token %}
 
+      <div class="title__forms">
+        Creating the question
+      </div>
+
       {% for field in form %}
         <div class="form-group">
           {% if field.errors %}
@@ -20,7 +24,7 @@
       {% endfor %}
 
       <button type="submit" name="button" class="subscribe_btn">Create question</button>
-      <a href="{% url "poll_detail_url" poll.id %}">Cancel</a>
+      <a class="cancel__btn" href="{% url "poll_detail_url" poll.id %}">Cancel</a>
     </form>
   </div>
 {% endblock content %}

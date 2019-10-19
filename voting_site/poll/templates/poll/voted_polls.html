@@ -6,15 +6,17 @@
   <div class="container">
 
     <div class="account__header__inner">
-      <a class="account__nav__link" href="{% url "account_url" user.id %}">
+      <a class="navigation__btn" href="{% url "account_url" user.id %}">
         <i class="fas fa-chevron-circle-left fa-lg"></i>
-        <div class="add__btn">to polls</div>
+        <div class="navigation__btn__text">to polls</div>
       </a>
     </div>
 
     <div class="table__user__polls">
       {% if polls %}
-        <h4>Your voted polls</h4>
+        <div class="title__forms">
+          Your voted polls
+        </div>
           <table class="table table-hover">
             <thead>
               <tr>
@@ -38,7 +40,9 @@
             </tbody>
           </table>
       {% else %}
-        <p>There is no voted polls yet :(</p>
+        <div class="title__center__light">
+          There is no voted polls yet :(
+        </div>
       {% endif %}
     </div>
   </div>

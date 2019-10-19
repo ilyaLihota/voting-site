@@ -7,6 +7,10 @@
     <form class="" action="{% url "choice_update_url" choice.id %}" method="post">
       {% csrf_token %}
 
+      <div class="title__forms">
+        Updating the choice "{{ choice.title }}"
+      </div>
+
       {% for field in form %}
         <div class="form-group">
           {% if field.errors %}

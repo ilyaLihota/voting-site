@@ -3,53 +3,56 @@
 {% block title %}Online voting | {{ poll.title }}{% endblock title %}
 
 {% block content %}
-<div class="container">
-  <div class="account__header__inner">
-    <a class="account__nav__link" href="{% url "account_url" user.id %}">
-      <i class="fas fa-chevron-circle-left fa-lg"></i>
-      <div class="add__btn">to polls</div>
-    </a>
-  </div>
+  <div class="container">
+    <div class="account__header__inner">
+      <a class="navigation__btn" href="{% url "account_url" user.id %}">
+        <i class="fas fa-chevron-circle-left fa-lg"></i>
+        <div class="navigation__btn__text">to polls</div>
+      </a>
+    </div>
 
-  <div class="table__user__polls">
-    <h4>Results of poll "{{ poll.title }}"</h4>
-    <table class="table table-hover">
+    <div class="title__forms">
+      Results of poll "{{ poll.title }}"
+    </div>
 
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Questions</th>
-          <th scope="col">Choices</th>
-          <th scope="col">Amount of votes</th>
-        </tr>
-      </thead>
+    <div class="table__user__polls">
+      <table class="table table-hover">
 
-      <tbody>
-        {% for question, list_choices in choices.items %}
+        <thead>
           <tr>
-            <th scope="row">{{ question.id }}</th>
-            <th scope="row">{{ question.title }}</th>
-            <td></td>
-            <td></td>
+            <th scope="col">#</th>
+            <th scope="col">Questions</th>
+            <th scope="col">Choices</th>
+            <th scope="col">Amount of votes</th>
           </tr>
-          {% for choice in list_choices %}
+        </thead>
+
+        <tbody>
+          {% for question, list_choices in choices.items %}
             <tr>
-              <th scope="row"></th>
+              <th scope="row">{{ question.id }}</th>
+              <th scope="row">{{ question.title }}</th>
               <td></td>
-              <td>{{ choice }}</td>
-              <td>{{ choice.answers.count }}</td>
+              <td></td>
             </tr>
-          {% empty %}
-            <td>There is no votes yet :(</td>
+            {% for choice in list_choices %}
+              <tr>
+                <th scope="row"></th>
+                <td></td>
+                <td>{{ choice }}</td>
+                <td>{{ choice.answers.count }}</td>
+              </tr>
+            {% empty %}
+              <td>There is no votes yet :(</td>
+            {% endfor %}
+            <tr>
+              <td></td><td></td><td></td><td></td>
+            </tr>
+
           {% endfor %}
-          <tr>
-            <td></td><td></td><td></td><td></td>
-          </tr>
 
-        {% endfor %}
-
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
 {% endblock content %}

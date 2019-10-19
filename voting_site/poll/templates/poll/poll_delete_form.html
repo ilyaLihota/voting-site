@@ -7,7 +7,10 @@
     <form action="{% url 'poll_delete_url' poll_id=poll.id %}" method="post">
       {% csrf_token %}
 
-      <h3>Are you sure you want to delete poll "{{ poll.title|title }}"?</h3>
+      <div class="title__forms">
+        Are you sure you want to delete the poll "{{ poll.title|title }}"?
+      </div>
+
       <button type="submit" name="button" class="subscribe_btn">Delete</button>
       <a class="cancel__btn" href="{% url "account_url" user.id %}">Cancel</a>
     </form>

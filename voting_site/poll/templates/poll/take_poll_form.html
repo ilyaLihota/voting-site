@@ -5,19 +5,25 @@
 {% block content %}
   <div class="container">
     <div class="account__header__inner">
-      <a class="account__nav__link" href="{% url "polls_list_url" %}">
+      <a class="navigation__btn" href="{% url "polls_list_url" %}">
         <i class="fas fa-chevron-circle-left fa-lg"></i>
-        <div class="add__btn">to polls</div>
+        <div class="navigation__btn__text">to polls</div>
       </a>
     </div>
-    <h2>{{ poll.title }}</h2>
-    <span>{{ poll.description }}</span>
+    <div class="title__center">
+      {{ poll.title.upper }}
+    </div>
+    <div class="sub__title__center">
+      {{ poll.description }}
+    </div>
       <div class="band">
         {% for key, value in context.items %}
           {% if value.1 %}
             <div class="item-2">
               <div class="answer__form__card">
-                <h3>{{ value.0 }}</h3>
+                <div class="title__answer__form">
+                  {{ value.0 }}
+                </div>
                 <form class="" action="{% url "take_poll_url" poll.id %}" method="post">
                   {% csrf_token %}
 

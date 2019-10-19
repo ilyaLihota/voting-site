@@ -7,7 +7,9 @@
     <form class="" action="{% url "poll_create_url" user.id %}" method="post">
       {% csrf_token %}
 
-      <h2>Creating a poll</h2>
+      <div class="title__forms">
+        Creating a poll
+      </div>
 
       {% for field in form %}
         <div class="form-group">
@@ -19,7 +21,7 @@
 
           {{ field.label }}
           {{ field }}
-          
+
         </div>
       {% endfor %}
 

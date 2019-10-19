@@ -7,6 +7,10 @@
     <form class="" action="{% url "choice_create_url" question.id %}" method="post">
       {% csrf_token %}
 
+      <div class="title__forms">
+        Creating the choice
+      </div>
+
       {% for field in form %}
         <div class="form-group">
           {% if field.errors %}
